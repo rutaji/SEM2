@@ -1,5 +1,5 @@
 
-test = float2bin(149.311,10)
+float2bin(149.311,10)
 
 function b = float2bin(number,dec_length)
     whole = floor(number);
@@ -17,7 +17,7 @@ function b = float2bin(number,dec_length)
         index = index / 2;
     end
     %% desetiné číslo
-    decimalBin=[]
+    decimalBin=[];
     for i = 1:dec_length
         result = decimal * 2;
         if result >= 1 
@@ -29,7 +29,7 @@ function b = float2bin(number,dec_length)
         
     end
     %% výpis
-    b = sprintf("%d",wholeBin) + "." + sprintf("%d",decimalBin)
+    b = sprintf("%d",wholeBin) + "." + sprintf("%d",decimalBin);
 end
 
 function b = getlowestpowerof2(number)
