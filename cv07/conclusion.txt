@@ -1,0 +1,3 @@
+Kuřáci platí větší náklady než nekuřáci.
+Průměrný kuřák zaplatí 32050kč za zdravotní pojištění. Zatímco průměrný nekuřák zaplatí 8434 kč. 
+Rozdíl mezi kuřáky a nekuřáky se zvětšuje s rostoucím BMI.
