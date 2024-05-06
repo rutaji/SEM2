@@ -1,0 +1,3 @@
+U CMR se chyba zmenšuje o stokrát se zvětšením přesnosti desetkrát.
+Na funkci sinx/x nemůžu použít ATR jelikož není definovaná v nule.
+Překvapilo mě jak se přesnost hned po první iteraci liší pro jiné funkce.
