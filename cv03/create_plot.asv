@@ -1,0 +1,28 @@
+function create_plot(A)
+    hold off;
+    clf;
+    hold on;
+
+    title('Konvergence rezidua');
+    xlabel('Počet iterací');
+    ylabel('Reziduum');
+
+    [x,flag,rr,it,rv] = jacobi(A, ones(5, 1), 1e-17, 1000);
+    if (flag ~= 4)
+        semilogx(rv, 'DisplayName','Jacobi');
+    end
+    [x,flag,rr,it,rv] = gauss_seidel(A, ones(25, 1), 1e-17, 1000);
+    if (flag ~= 4)
+        semilogx(rv, 'DisplayName','Gauss Seidel');
+    end
+    [x,flag,rr,it,rv] = pcg(A, ones(25, 1), 1e-17, 1000);
+    if (flag ~= 4)
+        semilogx(rv, 'DisplayName','PCG');
+    end
+    legend('Location','northeastoutside')
+
+end
+    
+
+
+

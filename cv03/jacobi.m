@@ -1,29 +1,34 @@
-function [x,flag,rr,itr,rv] = jacobi(A,b,toler,maxIter)
-    x = zeros(size(b,1),1);
-    n=size(x,1);
-    itr=0;
-    rv = zeros(maxIter,1);
+function [x,flag,rr,it,rv] = jacobi(A,b,toler,maxIter)
+    n = length(b); %počet rovnic
+    x = zeros(n, 1); %momentální výsledek
+    x_new = zeros(n, 1); % nový výsledek
+    rv = zeros(maxIter+1,1);
     flag = 1;
-    while itr<maxIter
+    rv(1) = norm(b - A * x) / norm(b);
 
-        xold=x;
-        for i=1:n% pro každýřádek
-            no_diagonal_sum=0; %suma prvku na diagonale * hodnota proměnné
-            for j=1:n %pro každý sloupec
-                if j~=i %pro každý prvek co není na diagonále diagonale
-                    no_diagonal_sum=no_diagonal_sum+A(i,j)*x(j);
+    for it= 1:maxIter
+        x = x_new;
+        for i = 1:n % pro každý řádek
+            sum = 0;
+            for j = 1:n % sečtu každý nediagonální prvek,vynásobený předchozím řešení rovnice
+                if j ~= i
+                    sum = sum + A(i, j) * x(j);
                 end
             end
-            x(i)=(1/A(i,i))*(b(i)-no_diagonal_sum); % vypočítam nove x
+            x_new(i) = (b(i) - sum) / A(i, i); %vypočtu nové řešení rovnice
         end
-        itr=itr+1;
-        normVal=abs(xold-x); % vypočítam rozdíl stareho x s novym a porovnam s toleranci
-        rr = normVal;
-        if normVal < toler
+
+        rr = norm(b - A * x) / norm(b); %vzdálenost od  vyřešení rovnic
+        rv(it+1) = rr;
+        if rr < toler
             flag = 0;
-            break
+            break;
         end
-        
+        if isnan(rr) || isinf(rr)
+            flag = 4;
+            break;
+        end
     end
-    
+     rv = rv(rv ~= 0);
 end
+

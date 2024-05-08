@@ -1,10 +1,11 @@
-function [x,flag,rr,itr,rv] = gauss_Seidel(A,b,toler,maxIter)
-    x = zeros(size(b,1),1);
+function [x,flag,rr,it,rv] = gauss_seidel(A,b,toler,maxIter)
+    x = b;
     n=size(x,1);
-    itr=0;
+    it=0;
     rv = zeros(maxIter,1);
+    rv(1) = norm(b - A * x) / norm(b);
     flag = 1;
-    while itr<maxIter
+    while it<maxIter
 
         xold=x;
         for i=1:n% pro každýřádek
@@ -16,17 +17,23 @@ function [x,flag,rr,itr,rv] = gauss_Seidel(A,b,toler,maxIter)
             for j=i+1:n
                 no_diagonal_sum=no_diagonal_sum+A(i,j)*xold(j);
             end
-            
-            x(i)=(1/A(i,i))*(b(i)-no_diagonal_sum); % vypočítam nove x
+
+             x(i)= -1/A(i,i) * (no_diagonal_sum - b(i));  % vypočítam nove x
         end
-        itr=itr+1;
-        normVal=abs(xold-x); % vypočítam rozdíl stareho x s novym a porovnam s toleranci
-        rr = normVal;
-        if normVal < toler
+        it=it+1;
+        rr= norm(b - A * x) / norm(b); % vypočítam rozdíl stareho x s novym a porovnam s toleranci
+        rv(it+1) = rr;
+        if rr < toler
             flag = 0;
             break
         end
+        if isnan(rr) || isinf(rr)
+            flag = 4;
+            break;
+        end
         
+
     end
+    rv = rv(rv ~= 0);
     
 end
