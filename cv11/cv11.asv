@@ -1,0 +1,15 @@
+
+m = 70 + 15;
+v = 30/3.6; %rychlost v m/s
+P = 20;
+k = 0.516;
+
+f = @(t,vi) (P - k*vi^2)/m;
+y0 = v;
+%matlab 
+[t,y] = ode45(f,[0,5],y0)
+plot()
+
+
+
+saveas(gcf, "graph.png");

@@ -3,5 +3,5 @@ function [fd] = central_difference(predchozi_hodnota,nasleduji_hodnota,h)
     %nasleduji_hodnota = nasledujici bod (rychlost)
     %h = casovy rozdil predchoziho a nasledujiciho bodu
 
-    fd = (nasleduji_hodnota - predchozi_hodnota) / h; % ( f(x0+h) - f(x0) ) / h 
+    fd = (nasleduji_hodnota - predchozi_hodnota) / 2*h; % ( f(x0+h) - f(x0-h) ) / h 
 end

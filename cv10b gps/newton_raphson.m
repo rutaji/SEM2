@@ -22,7 +22,7 @@ function [x, k] = newton_raphson(f,J,x0,tol,maxit)
     while (res > tol && k < maxit)
       k = k + 1;
       fx = f(x);
-      J(x)
+      %J(x)
       r = J(x)\fx;
       x = x - r;
       res = norm(fx);
